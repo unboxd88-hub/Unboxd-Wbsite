@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // 2) AI request (returns { reply, action, version })
 // ===============================
 async function sendMessage(message) {
-  const response = await fetch("http://localhost:3000/chat", {
+  const response = await fetch("https://super-aloysia-unboxdstudios-ed352b8b.koyeb.app/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message }),
