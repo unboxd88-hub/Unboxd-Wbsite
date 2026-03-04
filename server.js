@@ -14,6 +14,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Unboxd API is running");
+});
+
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // ✅ This version string is the easiest proof you’re running the right code
