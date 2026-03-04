@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - Unboxd Studios</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(rgba(14,14,17,0.85), rgba(14,14,17,0.9)),
+    url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+nav {
+    padding: 25px 10%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #5f27cd;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Section Layout */
+section {
+    padding: 120px 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass Contact Card */
+.contact-card {
+    background: rgba(22,22,28,0.85);
+    backdrop-filter: blur(15px);
+    padding: 60px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+}
+
+.contact-card h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input, textarea {
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #0e0e11;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #5f27cd;
+    box-shadow: 0 0 10px rgba(95,39,205,0.5);
+}
+
+textarea {
+    resize: none;
+    height: 120px;
+}
+
+button {
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #5f27cd, #341f97);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(95,39,205,0.4);
+}
+
+/* Floating Background Shapes */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #5f27cd, #341f97);
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+}
+
+.circle.one {
+    width: 200px;
+    height: 200px;
+    top: 15%;
+    left: 5%;
+}
+
+.circle.two {
+    width: 300px;
+    height: 300px;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsive */
+@media(max-width: 768px){
+    .contact-card {
+        padding: 40px 25px;
+    }
+
+    .contact-card h1 {
+        font-size: 28px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Floating Shapes -->
+<div class="circle one"></div>
+<div class="circle two"></div>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<section>
+  <div class="contact-card">
+    <h1>Contact Us</h1>
+
+    <form id="contactForm" method="POST">
+      <input id="name" type="text" name="name" placeholder="Your Name" required>
+      <input id="email" type="email" name="email" placeholder="Your Email" required>
+      <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+  </div>
+</section>
+
+<script>
+const WEBHOOK_URL = "https://hook.eu1.make.com/fae7fm3lo256oq4nwo3gi7cdzeu9n3l3";
+
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  try {
+    const res = await fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+        source: "Unboxd Website",
+        timestamp: new Date().toISOString()
+      })
+    });
+
+    // If Make responds with an error, show it
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Webhook failed:", res.status, text);
+      alert(`Webhook error: ${res.status}\n${text}`);
+      return;
+    }
+
+    alert("✅ Message sent successfully! We will contact you soon.");
+    document.getElementById("contactForm").reset();
+
+  } catch (error) {
+    console.error("Network error:", error);
+    alert("❌ Network error. Open Console (F12) → Console and send me the red error text.");
+  }
+});
+</script>
+
+</body>
+</html>

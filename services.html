@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Services - Unboxd Studios</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f0f1a, #1a1a2e, #16213e);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* NAVIGATION */
+nav {
+    padding: 20px 10%;
+    display: flex;
+    justify-content: flex-end;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #5f27cd;
+}
+
+/* SECTION */
+section {
+    padding: 120px 10%;
+    text-align: center;
+}
+
+section h1 {
+    font-size: 42px;
+    margin-bottom: 60px;
+    animation: slideUp 1s ease forwards;
+}
+
+/* SERVICES */
+.service {
+    background: rgba(255,255,255,0.05);
+    padding: 30px;
+    margin: 30px auto;
+    border-radius: 15px;
+    max-width: 800px;
+    backdrop-filter: blur(10px);
+    transition: 0.4s ease;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.service:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(95,39,205,0.4);
+}
+
+.service img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.service h2 {
+    margin-bottom: 15px;
+}
+
+.service p {
+    color: #ccc;
+    font-size: 15px;
+}
+
+/* ANIMATION */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+    section h1 {
+        font-size: 32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<section>
+  <h1>Our Services</h1>
+
+  <div class="service">
+    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80">
+    <h2>AI Automation</h2>
+    <p>Custom AI-powered workflows that capture leads, qualify prospects, and follow up automatically to increase your revenue without increasing workload.</p>
+  </div>
+
+  <div class="service">
+    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80">
+    <h2>Website Development</h2>
+    <p>Modern, high-performance websites built for credibility, speed, and conversion — designed to turn visitors into paying clients.</p>
+  </div>
+
+  
+
+</section>
+
+<script>
+/* SCROLL REVEAL */
+const services = document.querySelectorAll('.service');
+
+function revealServices() {
+    const triggerBottom = window.innerHeight * 0.85;
+
+    services.forEach(service => {
+        const top = service.getBoundingClientRect().top;
+
+        if (top < triggerBottom) {
+            service.style.opacity = 1;
+            service.style.transform = "translateY(0)";
+        }
+    });
+}
+
+window.addEventListener('scroll', revealServices);
+window.addEventListener('load', revealServices);
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

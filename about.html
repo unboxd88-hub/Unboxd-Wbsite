@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - Unboxd Studios</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(rgba(14,14,17,0.85), rgba(14,14,17,0.9)),
+    url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+nav {
+    padding: 25px 10%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #5f27cd;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Main Section */
+section {
+    padding: 120px 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass Card */
+.about-card {
+    background: rgba(22,22,28,0.8);
+    backdrop-filter: blur(15px);
+    padding: 60px;
+    border-radius: 20px;
+    max-width: 800px;
+    text-align: center;
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+}
+
+.about-card h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.about-card p {
+    font-size: 18px;
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Highlight Accent */
+.highlight {
+    color: #5f27cd;
+    font-weight: bold;
+}
+
+/* Floating Background Shapes */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #5f27cd, #341f97);
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+}
+
+.circle.one {
+    width: 200px;
+    height: 200px;
+    top: 15%;
+    left: 5%;
+}
+
+.circle.two {
+    width: 300px;
+    height: 300px;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsive */
+@media(max-width: 768px){
+    .about-card {
+        padding: 40px 25px;
+    }
+
+    .about-card h1 {
+        font-size: 28px;
+    }
+
+    .about-card p {
+        font-size: 16px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Floating Shapes -->
+<div class="circle one"></div>
+<div class="circle two"></div>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<section>
+  <div class="about-card">
+    <h1>About Unboxd Studios</h1>
+    <p>
+      At <span class="highlight">Unboxd Studios</span>, we build intelligent digital systems that help businesses scale smarter, not harder.
+    </p>
+    <p>
+      We specialize in <span class="highlight">AI-driven automation</span>, high-converting websites, and custom internal systems that improve efficiency, generate leads, and increase revenue.
+    </p>
+    <p>
+      Our mission is simple: <span class="highlight">Unbox your business potential</span> using modern technology.
+    </p>
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
